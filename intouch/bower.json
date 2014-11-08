@@ -1,0 +1,20 @@
+{
+  "name": "intouch",
+  "version": "0.0.0",
+  "homepage": "https://github.com/majoranaa/hacksc",
+  "authors": [
+    "kai yang <kai.yang412@gmail.com>",
+    "max woo"
+  ],
+  "description": "intouch bower packages",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.4.7"
+  }
+}
