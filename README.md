@@ -1,1 +1,1 @@
-=Kai Yang and Max Woo HACKSC Project
+#Kai Yang and Max Woo HACKSC Project
