@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('UserConnection', {
+module.exports = mongoose.model('CompanyConnection', {
     m_username: String,
     tagName: [String],
     username: String,

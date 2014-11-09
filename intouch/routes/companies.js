@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../model/user');
 var CompanyTags = require('../model/c_tagmodel');
+var CompanyConnections = require('../model/c_connections');
 
 var user_fields = ['username', 'email', 'firstName', 'lastName', 'phone', 'address']; //, 'major', 'school', 'year', 'resume'];
 

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var CompanyConnections = require('../model/c_connections');
+
 module.exports = function(passport) {
     /* GET home page. */
     router.get('/', function(req, res) {
@@ -29,6 +31,43 @@ module.exports = function(passport) {
     } else {
         res.render('login', { title: 'Login', login: req.isAuthenticated(), user: req.user, message: req.flash('message') });
     }
+    });
+
+    router.get('/landing', function(req, res) {
+        res.render('landing', { title: 'HackSC', user: req.user, message: req.flash('message') });
+    });
+
+    router.post('/landing', function(req, res, next) {
+        CompanyConnections.create({
+            m_username: 'HackSC',
+            tagName: 'hackathon',
+            username: username,
+            email: req.body.email || '',
+            firstName: req.body.firstName || '',
+            lastName: req.body.lastName || '',
+            phone: req.body.phone || '',
+            address: req.body.address || '',
+            major: '',
+            school: '',
+            year: '',
+            resume: ''
+        }, function(err) {
+            if (err) res.send(err);
+            res.redirect('/connections');
+        });
+    });
+
+    router.get('/connections', function(req, res) {
+        var username = req.user.username;
+        CompanyConnections.find({'m_username':username}, function(err, tags) {
+            if (err)
+                return done(err);
+            if (!tags) {
+                console.log('No tags found for ' + username);
+                req.flash('message', 'No tags found for ' + username + ' not found');
+            }
+            res.render('connections', { user: req.user, login: req.isAuthenticated(), users: tags });
+        });
     });
 
     router.get('/login', function(req, res) {

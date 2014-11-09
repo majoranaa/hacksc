@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .row
+    h1.text-center Connections for #{user.username}!
+  .row
+    .large-8.push-3.columns
+      a(href='/logout', class='text-right new-account') Sign Out
+      for user in users
+        .row
+          p.
+            #{user['username']}
