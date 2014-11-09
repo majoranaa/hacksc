@@ -1,1 +1,1 @@
-/home/kai/projects/hacksc/intouch/bower_components/jquery.cookie/jquery.cookie.js
+../../bower_components/jquery.cookie/jquery.cookie.js

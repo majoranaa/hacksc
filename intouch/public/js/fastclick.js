@@ -1,1 +1,1 @@
-/home/kai/projects/hacksc/intouch/bower_components/fastclick/lib/fastclick.js
+../../bower_components/fastclick/lib/fastclick.js

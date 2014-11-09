@@ -1,1 +1,1 @@
-/home/kai/projects/hacksc/intouch/bower_components/jquery-placeholder/jquery.placeholder.js
+../../bower_components/jquery-placeholder/jquery.placeholder.js

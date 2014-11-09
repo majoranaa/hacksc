@@ -1,1 +1,1 @@
-/home/kai/projects/hacksc/intouch/bower_components/modernizr/modernizr.js
+../../bower_components/modernizr/modernizr.js
