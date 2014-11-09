@@ -41,7 +41,7 @@ module.exports = function(passport) {
         CompanyConnections.create({
             m_username: 'HackSC',
             tagName: 'hackathon',
-            username: username,
+            username: req.body.username || '',
             email: req.body.email || '',
             firstName: req.body.firstName || '',
             lastName: req.body.lastName || '',
