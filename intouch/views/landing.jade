@@ -14,12 +14,11 @@ block content
 
 				.signup-wall
 					form.form-signin(action='/landing', method='POST')
-						input.form-control(type='text', name='username', placeholder='Username',required, autofocus)
-						input.form-control(type='text', name='firstName', placeholder='First Name')
-						input.form-control(type='text', name='lastName', placeholder='Last Name')
-						input.form-control(type='email', name='email', placeholder='Email')
-						input.form-control(type='text', name='phone', placeholder='Phone')
-						input.form-control(type='text', name='address', placeholder='Address')
+						input.form-control(type='text', name='firstName', placeholder='First Name', value=''+defTag.firstName)
+						input.form-control(type='text', name='lastName', placeholder='Last Name', value=''+defTag.lastName)
+						input.form-control(type='email', name='email', placeholder='Email', value=''+defTag.email)
+						input.form-control(type='text', name='phone', placeholder='Phone', value=''+defTag.phone)
+						input.form-control(type='text', name='address', placeholder='Address', value=''+defTag.address)
 
 						button(class='button small', type='submit') Submit
 						#message

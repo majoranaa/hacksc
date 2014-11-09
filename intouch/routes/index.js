@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var CompanyConnections = require('../model/c_connections');
+var UserTags = require('../model/u_tagmodel');
 
 module.exports = function(passport) {
     /* GET home page. */
@@ -34,14 +35,24 @@ module.exports = function(passport) {
     });
 
     router.get('/landing', function(req, res) {
-        res.render('landing', { title: 'HackSC', user: req.user, message: req.flash('message') });
+        var username = req.user.username;
+        UserTags.find({'username':username,'tagName':'default'}, function(err, tags) {
+            if (err)
+                return done(err);
+            if (!tags) {
+                console.log('No tags found for ' + username);
+                req.flash('message', 'No tags found for ' + username + ' not found');
+            }
+            console.log(tags[0]);
+            res.render('landing', { title: 'HackSC', user: req.user, message: req.flash('message'), defTag: tags[0] || {} });
+        });
     });
 
     router.post('/landing', function(req, res, next) {
         CompanyConnections.create({
             m_username: 'HackSC',
             tagName: 'hackathon',
-            username: req.body.username || '',
+            username: req.user.username || '',
             email: req.body.email || '',
             firstName: req.body.firstName || '',
             lastName: req.body.lastName || '',
