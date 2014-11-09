@@ -6,13 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // mongodb setup
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/intouch');
+//var mongo = require('mongodb');
+//var monk = require('monk');
+//var db = monk('localhost:27017/intouch');
 
-var routes = require('./routes/index');
-var accounts = require('./routes/accounts');
+// mongoose setup
+var dbConfig = require('./db');
+var mongoose = require('mongoose');
+mongoose.connect(dbConfig.url);
 
+var flash = require('connect-flash');
 var app = express();
 
 // view engine setup
@@ -27,13 +30,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req,res,next) {
+/*app.use(function(req,res,next) {
     req.db = db;
     next();
-});
+});*/
+
+// passport setup
+var passport = require('passport');
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'secretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+var initPassport = require('./passport/init');
+initPassport(passport);
+var routes = require('./routes/index')(passport);
+var home = require('./routes/home')(passport);
+var users = require('./routes/users')(passport);
 
 app.use('/', routes);
-//app.use('/accounts', accounts);
+app.use('/home', home);
+app.use('/u', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

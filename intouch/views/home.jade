@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .row
+    h1.text-center Welcome #{user.firstName}!
+  .row
+    .large-8.push-3.columns
+      a(href='/logout', class='text-right new-account') Sign Out
+      p.
+        You're not following anyone yet
+    .large-3.pull-9.columns
+      img#prof_pic.text-center.profile-img(src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
+      for field in fields
+        hr
+        .row
+          span.secondary.label #{field}
+          if user[field]
+            span.right.user_field #{user[field]}
+          else
+            span.right.user_field: a(href='/home/settings')
+              |Update this field? 
+              i.foundicon-edit

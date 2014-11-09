@@ -2,6 +2,74 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/css/style.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //link(type='text/css', rel='stylesheet', href='/css/style.css')
+    link(type='text/css', rel='stylesheet', href='/css/passport.css')
+    link(type='text/css', rel='stylesheet', href='/css/normalize.css')
+    link(type='text/css', rel='stylesheet', href='/css/foundation.css')
+    link(type='text/css', rel='stylesheet', href='/css/general_foundicons_ie7.css')
+    link(type='text/css', rel='stylesheet', href='/css/general_foundicons.css')
+    link(type='text/css', rel='stylesheet', href='/css/app.css')
+    link(type='text/css', rel='stylesheet', href='/css/custom.css')
+    link(type='text/css', rel='stylesheet', href='http://fonts.googleapis.com/css?family=Ubuntu')
+    script(language='javascript', type='text/javascript', src='/js/modernizr.js')
+    script(language='javascript', type='text/javascript', src='/js/qrcode.min.js')
   body
-    block content
+    .off-canvas-wrap(data-offcanvas)
+      .inner-wrap
+        if login
+          aside.left-off-canvas-menu
+            #reader
+              //div
+                //input#scan_code_input(type='file',accept='image/*')
+                //img(src='/images/upload.png')
+          aside.right-off-canvas-menu
+            #qr_code
+            
+        .sticky
+          nav.top-bar(data-topbar, role='navigation')
+            ul.title-area
+              li.name
+                h1: a(href='/'): img(src='/images/logo.png')
+              li.toggle-topbar.menu-icon: a(href='#'): span='Menu'
+            section.top-bar-section
+              ul.left
+                li: a(href='/about') ABOUT
+                //li: a(href='/peers') PEERS
+                //li: a(href='/recruit') RECRUITERS
+                li: a(href='/contact') CONTACT
+              ul.right
+                if login
+                  li: a(href='/home') PROFILE
+                  li: a(href='/home/settings'): img.qr_icon(src='/images/gear.png')
+                  li: a.left-off-canvas-toggle(href='#'): img.qr_icon(src='/images/scan.png')
+                  li: a.right-off-canvas-toggle(href='#'): img.qr_icon(src='/images/qr.png')
+                else
+                  li: a(href='/login') LOGIN
+  
+        block content
+
+        a.exit-off-canvas
+
+    footer.row
+      .large-12.columns.text-center
+        hr
+        p Copyright 2014 Kai and Max. Peace
+
+    script(language='javascript', type='text/javascript', src='/js/jquery.min.js')
+    script(language='javascript', type='text/javascript', src='/js/jquery.placeholder.js')
+    script(language='javascript', type='text/javascript', src='/js/jquery.cookie.js')
+    script(language='javascript', type='text/javascript', src='/js/jquery-ui.min.js')      
+    script(language='javascript', type='text/javascript', src='/js/fastclick.js')
+    script(language='javascript', type='text/javascript', src='/js/foundation.min.js')
+    if login
+      script(language='javascript', type='text/javascript', src='/js/jsqrcode-combined.min.js')
+      script(language='javascript', type='text/javascript', src='/js/jquery.exif.js')
+      script(language='javascript', type='text/javascript', src='/js/jquery.canvasResize.js')
+      script(language='javascript', type='text/javascript', src='/js/canvasResize.js')
+      script(language='javascript', type='text/javascript', src='/js/scan.js')
+    script(language='javascript', type='text/javascript')
+      |$(document).foundation();
+      if login
+        |new QRCode(document.getElementById('qr_code'), "#{user.username}");
+        |$('#scan_code img').click(function() {$('#scan_code input').click();});

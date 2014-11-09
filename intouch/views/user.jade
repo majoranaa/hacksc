@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .row
+    h1 #{id}
+    if message.length
+      #message
+        h4.text-center.error #{message}
+    else
+      h4 Coming Soon!

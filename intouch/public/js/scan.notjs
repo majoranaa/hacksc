@@ -1,0 +1,57 @@
+var MAX_SIDE = 750;
+
+window.onload = function() {
+
+    function readerOnload(e) {
+	resizeImage(e.target.result, function(src) {
+            var resizedImage = new Image();
+            resizedImage.src = src;
+            document.body.appendChild(resizedImage);
+	});
+    }
+
+    function handleFiles(files) {
+        var reader = new FileReader();
+        reader.onload = readerOnload;
+	reader.readAsDataURL(files[0]);
+    }
+
+    document.getElementById('scan_code_input').onchange = handleFiles;
+
+    /*function resizeImage(src, callback) { // src is URL referencing a blob
+	var maxpixels = MAX_SIDE*MAX_SIDE;
+	var image = new Image();
+
+	image.onload = function(){
+            if (image.width*image.height < maxpixels) {
+                //src is already small enough, just pass it to callback
+                callback(src);
+            } else {
+                //src too big, resize it!
+
+                var aspect = image.width / image.height;
+                var nheight = Math.floor(Math.sqrt(maxpixels/aspect));
+		var ratio = image.height / nheight;
+		var nblock = Math.floor(MAX_SIDE/ratio);
+		var blocksize = nblock*ratio;
+                var nwidth = Math.floor(aspect*nheight);
+
+                temp_canvas = $('<canvas/>',  {width: blocksize, height: blocksize}).css('display','none').appendTo('body')[0];
+                temp_ctx = temp_canvas.getContext('2d');
+                result_canvas = $('<canvas/>',  {width: nwidth, height: nheight}).appendTo('body')[0];
+                result_ctx = result_canvas.getContext('2d');
+
+		for (var row = 0; row < nheight; row++) {
+		    for (var col = 0; col < nwidth; col++) {
+			temp_ctx.clearRect(0, 0, temp_canvas.width, temp_canvas.height);
+			temp_ctx.drawImage(image, col*blocksize, row*blocksize, Math.min(blocksize,image.width-col*blocksize), Math.min(blocksize,image.height-row*blocksize), 0, 0);
+			result_ctx.drawImage(temp_canvas, col*nblock, row*nblock, nblock, nblock);
+		    }
+		}
+	    }
+	}
+	
+	image.src = src;
+    }*/
+
+};
