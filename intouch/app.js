@@ -43,6 +43,7 @@ initPassport(passport);
 var routes = require('./routes/index')(passport);
 //var home = require('./routes/home')(passport);
 var users = require('./routes/users')(passport);
+var companies = require('./routes/companies')(passport);
 
 app.use('/', routes);
 //app.use('/home', home);
