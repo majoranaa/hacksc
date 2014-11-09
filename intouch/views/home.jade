@@ -6,8 +6,11 @@ block content
   .row
     .large-8.push-3.columns
       a(href='/logout', class='text-right new-account') Sign Out
-      p.
-        You're not following anyone yet
+      for tag in usertags
+        .row
+          p.
+            #{tag['tagName']}
+      a(href='/addtag') Add Tag
     .large-3.pull-9.columns
       img#prof_pic.text-center.profile-img(src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
       for field in fields
@@ -20,3 +23,6 @@ block content
             span.right.user_field: a(href='/u/home/settings')
               |Update this field? 
               i.foundicon-edit
+
+
+

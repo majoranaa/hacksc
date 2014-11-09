@@ -48,6 +48,7 @@ var companies = require('./routes/companies')(passport);
 app.use('/', routes);
 //app.use('/home', home);
 app.use('/u', users);
+app.use('/c', companies);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

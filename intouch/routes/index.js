@@ -23,6 +23,14 @@ module.exports = function(passport) {
 	res.render('contact', { title: 'Contact Us', login: req.isAuthenticated(), user: req.user });
     });
 
+    router.get('/addtag', function(req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect((req.user.is_comp?'/c':'/u') + '/addtag');
+    } else {
+        res.render('login', { title: 'Login', login: req.isAuthenticated(), user: req.user, message: req.flash('message') });
+    }
+    });
+
     router.get('/login', function(req, res) {
 	if (req.isAuthenticated()) {
 	    res.redirect((req.user.is_comp?'/c':'/u') + '/home');

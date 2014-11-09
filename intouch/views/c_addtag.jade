@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  br
+  .container
+    .row
+      .large-4.large-offset-4.columns
+        h1.text-center.login-title Make-a-Tag Factory!
+          .signup-wall
+            form.form-signin(action='/c/addtag', method='POST')
+              input.form-control(type='text', name='tagName', placeholder='Tag Name',required, autofocus)
+              input.form-control(type='checkbox', name='firstName')
+              | First Name
+              br
+              input.form-control(type='checkbox', name='lastName')
+              | Last Name
+              br
+              input.form-control(type='checkbox', name='email')
+              | Email
+              br
+              input.form-control(type='checkbox', name='phone')
+              | Phone
+              br
+              input.form-control(type='checkbox', name='address')
+              | Address
+              br
+
+              button(class='button small', type='submit') Create Tag
+              #message
+              if message.length
+                h4.text-center.error #{message}
