@@ -4,12 +4,13 @@ module.exports = mongoose.model('User', {
     username: String,
     password: String,
     email: [String],
-    firstName: String,
+    firstName: String, // representative name for companies
     lastName: String,
     phone: [String],
     address: [String],
-    major: String,
-    school: String,
-    year: String,
-    resume: String
+    is_comp: Boolean,
+    //major: String,
+    //school: String,
+    //year: String,
+    //resume: String
 });

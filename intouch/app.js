@@ -30,11 +30,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*app.use(function(req,res,next) {
-    req.db = db;
-    next();
-});*/
-
 // passport setup
 var passport = require('passport');
 var expressSession = require('express-session');
@@ -46,11 +41,11 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 var routes = require('./routes/index')(passport);
-var home = require('./routes/home')(passport);
+//var home = require('./routes/home')(passport);
 var users = require('./routes/users')(passport);
 
 app.use('/', routes);
-app.use('/home', home);
+//app.use('/home', home);
 app.use('/u', users);
 
 // catch 404 and forward to error handler

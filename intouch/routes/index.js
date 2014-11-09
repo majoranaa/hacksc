@@ -25,7 +25,7 @@ module.exports = function(passport) {
 
     router.get('/login', function(req, res) {
 	if (req.isAuthenticated()) {
-	    res.redirect('/home');
+	    res.redirect((req.user.is_comp?'/c':'/u') + '/home');
 	} else {
 	    res.render('login', { title: 'Login', login: req.isAuthenticated(), user: req.user, message: req.flash('message') });
 	}
@@ -33,18 +33,22 @@ module.exports = function(passport) {
 
     /* Handle Login POST */
     router.post('/login', passport.authenticate('login', {
-	successRedirect: '/home',
+	successRedirect: '/login',
 	failureRedirect: '/login',
 	failureFlash : true  
     }));
 
     router.get('/register', function(req, res) {
-	res.render('register', { title: 'Register', login: req.isAuthenticated(), message: req.flash('message'), user: req.user });
+	if (req.isAuthenticated()) {
+	    res.redirect((req.user.is_comp?'/c':'/u') + '/home');
+	} else {
+	    res.render('register', { title: 'Register', login: req.isAuthenticated(), message: req.flash('message'), user: req.user });
+	}
     });
 
     /* Handle Registration POST */
     router.post('/register', passport.authenticate('register', {
-	successRedirect: '/home',
+	successRedirect: '/register',
 	failureRedirect: '/register',
 	failureFlash : true  
     }));

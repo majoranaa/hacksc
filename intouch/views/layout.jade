@@ -40,8 +40,12 @@ html
                 li: a(href='/contact') CONTACT
               ul.right
                 if login
-                  li: a(href='/home') PROFILE
-                  li: a(href='/home/settings'): img.qr_icon(src='/images/gear.png')
+                  if user.is_comp
+                    li: a(href='/c/home') PROFILE
+                    li: a(href='/c/settings'): img.qr_icon(src='/images/gear.png')
+                  else
+                    li: a(href='/u/home') PROFILE
+                    li: a(href='/u/settings'): img.qr_icon(src='/images/gear.png')
                   li: a.left-off-canvas-toggle(href='#'): img.qr_icon(src='/images/scan.png')
                   li: a.right-off-canvas-toggle(href='#'): img.qr_icon(src='/images/qr.png')
                 else
